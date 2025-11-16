@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <WiFi.h>
 #include <WiFiClientSecure.h>
 #include <PubSubClient.h>
@@ -7,10 +8,10 @@
 const char* ssid = "Wokwi-GUEST";  
 const char* password = "";          
 const char* mqtt_server = "broker.hivemq.com";
-const int mqtt_port = 1883; // Gunakan 1883 (non-SSL) untuk Wokwi
+const int mqtt_port = 1883;
 
-const char* publishTopic = "Tenz/UPN/coffeeShop/sendData";
-const char* subscribeTopic = "Tenz/UPN/coffeeShop/getData";
+const char* publishTopic = "T3nz/UPN/coffeeShop/sendData";
+const char* subscribeTopic = "T3nz/UPN/coffeeShop/getData";
 
 // ======== STRUKTUR DATA ========
 struct PublishData {
@@ -38,7 +39,7 @@ volatile unsigned long timerStartTime = 0;
 volatile bool timerActive = false;
 
 // ======== PIN PERANGKAT ========
-const int PIN_HDMI = 33;  // ganti sesuai pin kamu
+const int PIN_HDMI = 18;  // ganti sesuai pin kamu
 
 // ======== DEKLARASI FUNGSI ========
 void setupWiFi();
@@ -175,7 +176,6 @@ void processReceivedData() {
       Serial.println("Data ditujukan untuk ESP ini!");
 
       digitalWrite(PIN_HDMI, receiveData.state ? HIGH : LOW);
-      sendData.state = receiveData.state;
 
       // Jika ada durasi
       if (receiveData.duration > 0) {
