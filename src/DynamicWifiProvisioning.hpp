@@ -1,0 +1,6 @@
+#ifndef DYNAMIC_WIFI_PROVISIONING_HPP
+#define DYNAMIC_WIFI_PROVISIONING_HPP
+
+void provisionWiFi();
+
+#endif
