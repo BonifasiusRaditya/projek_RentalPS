@@ -4,9 +4,9 @@
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
 
+#include "DynamicWifiProvisioning.hpp"
+
 // ======== KONFIGURASI WIFI DAN MQTT ========
-const char* ssid = "Wokwi-GUEST";  
-const char* password = "";          
 const char* mqtt_server = "broker.hivemq.com";
 const int mqtt_port = 1883;
 
@@ -80,19 +80,8 @@ void loop() {
 
 // ======== KONEKSI WIFI ========
 void setupWiFi() {
-  Serial.println();
-  Serial.print("Connecting to WiFi: ");
-  Serial.println(ssid);
-
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid, password);
-
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-
-  Serial.println("\nWiFi connected!");
+  provisionWiFi();
+  
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
   Serial.print("MAC address: ");
